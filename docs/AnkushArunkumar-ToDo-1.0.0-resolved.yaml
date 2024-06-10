@@ -1,0 +1,323 @@
+openapi: 3.0.0
+
+info:
+  description: This is the OpenAPI Specification for a ToDo List application
+  version: "1.0.0"
+  title: ToDo List Application API
+  contact:
+    email: ankush.arunkumar.2023@bristol.ac.uk
+    
+tags:
+  - name: users
+    description: Operations on Users - login and register
+  - name: tasks
+    description: Operations on Tasks - CRUD
+    
+paths:
+  /register:
+    post:
+      tags:
+        - users
+      summary: Register a user
+      description: Adds user object to user table
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '201':
+          description: User Created
+        
+        '400':
+          $ref: '#/components/responses/BadRequest'
+          
+        '500':
+          $ref: '#/components/responses/ServerError'
+  
+  /user:
+    post:
+      tags:
+        - users
+      summary: Login user
+      description: Authenticates a user and returns JWT
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: Success Response
+          content:
+            'application/json':
+              schema:
+                properties:
+                      access_token:
+                        type: string
+                        description: JWT Token
+                        example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+        
+        '401':
+          $ref: '#/components/responses/UnAuthorized'
+        
+        '404':
+          $ref: '#/components/responses/NotFound'
+          
+        '500':
+          $ref: '#/components/responses/ServerError'
+    
+  /tasks:
+    get:
+      tags:
+        - tasks
+      summary: Get All tasks
+      description: Returns all tasks of the authenticated user
+      parameters:
+        - in: header
+          name: access_token
+          schema:
+            type: string
+          description: JWT Access token
+          required: true
+      responses:
+        '200':
+          description: Success Response
+          content:
+            'application/json':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+        
+        '401':
+          $ref: '#/components/responses/UnAuthorized'
+        
+        '404':
+          $ref: '#/components/responses/NotFound'
+          
+        '500':
+          $ref: '#/components/responses/ServerError'
+    
+    post:
+      tags:
+        - tasks
+      summary: Add a new task
+      description: Add a task with authenticated user
+      parameters:
+        - in: header
+          name: access_token
+          schema:
+            type: string
+          description: JWT Access token
+          required: true
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        '201':
+          description: User Created
+        
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        
+        '401':
+          $ref: '#/components/responses/UnAuthorized'
+          
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /tasks/{task_id}:
+    put:
+      tags:
+        - tasks
+      summary: Edit a task
+      description: Edit a task with authenticated user
+      parameters:
+        - in: path
+          name: task_id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the task to edit
+        - in: header
+          name: access_token
+          schema:
+            type: string
+          description: JWT Access token
+          required: true
+      requestBody:
+        content:
+          'application/json':
+            schema:
+              $ref: '#/components/schemas/Task'
+      responses:
+        '200':
+          description: Success Response
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Task'
+        
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        
+        '401':
+          $ref: '#/components/responses/UnAuthorized'
+          
+        '500':
+          $ref: '#/components/responses/ServerError'
+          
+    delete:
+      tags:
+        - tasks
+      summary: Delete a task
+      description: Delete a task with authenticated user
+      parameters:
+        - in: path
+          name: task_id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the task to delete
+        - in: header
+          name: access_token
+          schema:
+            type: string
+          description: JWT Access token
+          required: true
+      responses:
+        '200':
+          description: Success Response
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Task'
+        
+        '401':
+          $ref: '#/components/responses/UnAuthorized'
+        
+        '404':
+          $ref: '#/components/responses/NotFound'
+          
+        '500':
+          $ref: '#/components/responses/ServerError'
+          
+    get:
+      tags:
+        - tasks
+      summary: Get a task
+      description: Get a task from table
+      parameters:
+        - in: path
+          name: task_id
+          schema:
+            type: integer
+          required: true
+          description: Numeric ID of the task to get
+      responses:
+        '200':
+          description: Success Response
+          content:
+            'application/json':
+              schema:
+                $ref: '#/components/schemas/Task'
+        
+        '404':
+          $ref: '#/components/responses/NotFound'
+          
+        '500':
+          $ref: '#/components/responses/ServerError'
+    
+        
+      
+      
+
+components:
+  schemas:
+    Task:
+      type: object
+      required:
+        - id
+        - title
+        - description
+        - completed
+        - user_id
+      properties:
+        id:
+          type: integer
+          example: 1
+        title:
+          type: string
+          example: JWT Authentication
+        description:
+          type: string
+          example: Write code to do JWT Auth
+        completed:
+          type: boolean
+          example: True
+        user_id:
+          type: integer
+          example: 34
+    User:
+      type: object
+      required:
+        - id
+        - username
+        - password
+      properties:
+        id:
+          type: integer
+          example: 23
+        username:
+          type: string
+          example: todolistuser
+        password:
+          type: string
+          example: passwordofuser
+    
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "This is an error message"
+          
+  responses:
+    UnAuthorized:
+      description: Request is unauthorized.
+      content:
+        'application/json':
+          schema:
+            $ref:  '#/components/schemas/Error'
+          example:
+            message: Unauthourised
+        
+    ServerError:
+      description: Server Error
+      content:
+        'application/json':
+          schema:
+            $ref:  '#/components/schemas/Error'
+          example:
+            message: Server Error
+      
+    NotFound:
+      description: Resource not found
+      content:
+        'application/json':
+          schema:
+            $ref:  '#/components/schemas/Error'
+          example:
+            message: Not Found
+      
+    BadRequest:
+      description: Bad request
+      content:
+        'application/json':
+          schema:
+            $ref:  '#/components/schemas/Error'
+          example:
+            message: Bad request

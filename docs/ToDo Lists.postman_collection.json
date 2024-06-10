@@ -1,0 +1,220 @@
+{
+	"info": {
+		"_postman_id": "a97f171b-7762-48f5-b73b-9040b51d9d73",
+		"name": "ToDo Lists",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "35920636"
+	},
+	"item": [
+		{
+			"name": "User Registration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"admin\",\n    \"password\":\"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/user/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"admin\",\n    \"password\":\"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/user/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Task",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxNzkzNDA3MCwianRpIjoiMjJjYWEyOGMtYjI3MS00OWFlLTg2M2QtNjhmMDE3ZWZhMGE2IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzE3OTM0MDcwLCJjc3JmIjoiNjZkOTg4ZTAtY2EyMC00YTM3LWJmNTMtOTVlYmIyN2ZlYTk2IiwiZXhwIjoxNzE3OTM0OTcwfQ.0DP4GwhsKVq0b-O18cRoz5Qh9irRZLLF7jtB52lNZXA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\":\"This is a test-3\",\n    \"description\":\"This is a test description\",\n    \"completed\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/todo/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"todo",
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All tasks for user",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxNzMyMzc3MiwianRpIjoiODA5Mzk1ZDMtNjY0OC00Yjg4LTkxZWYtMjNjZDAyYmUxMmVkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzE3MzIzNzcyLCJjc3JmIjoiNTg4ZGY0M2YtNGYyYi00MWIxLTg3NGMtM2FkM2QzYzg0OGIxIiwiZXhwIjoxNzE3MzI0NjcyfQ.zUvOMXW9BNSBVlxHc9urU2Hx1Q3874K6sRYAeb9nN5g",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost/api/todo/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"todo",
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Task",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxNzkzNDI0MCwianRpIjoiODlkZmRhNGMtZWU3OS00NzMwLTkzOTUtMzcyNTA5ZGFkZWI0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzE3OTM0MjQwLCJjc3JmIjoiOWFiNWFlMTQtMDdjNi00YTEyLTkyMGItZjg1N2M5OGY3Yzg3IiwiZXhwIjoxNzE3OTM1MTQwfQ.QZBvtRsf3ToIEcrPVWW2WnffQtu71eD-tWj4G8bsTaM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"completed\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/todo/tasks/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"todo",
+						"tasks",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Task",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxNzkzNDI0MCwianRpIjoiODlkZmRhNGMtZWU3OS00NzMwLTkzOTUtMzcyNTA5ZGFkZWI0IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzE3OTM0MjQwLCJjc3JmIjoiOWFiNWFlMTQtMDdjNi00YTEyLTkyMGItZjg1N2M5OGY3Yzg3IiwiZXhwIjoxNzE3OTM1MTQwfQ.QZBvtRsf3ToIEcrPVWW2WnffQtu71eD-tWj4G8bsTaM",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost/api/todo/tasks/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"todo",
+						"tasks",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Task by ID",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcxNzMyMzc3MiwianRpIjoiODA5Mzk1ZDMtNjY0OC00Yjg4LTkxZWYtMjNjZDAyYmUxMmVkIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNzE3MzIzNzcyLCJjc3JmIjoiNTg4ZGY0M2YtNGYyYi00MWIxLTg3NGMtM2FkM2QzYzg0OGIxIiwiZXhwIjoxNzE3MzI0NjcyfQ.zUvOMXW9BNSBVlxHc9urU2Hx1Q3874K6sRYAeb9nN5g",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "http://localhost/api/todo/tasks/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"todo",
+						"tasks",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
