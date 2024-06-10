@@ -1,4 +1,4 @@
-## This is the code for the take home assignment of UKHSA Lead Python Dev Role
+## This is the code for the take home assignment of Lead Python Dev Role
 
 
 ## High Level Diagram
